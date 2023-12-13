@@ -9,17 +9,21 @@ else()
   set(ENV{FC}  gfortran) # Fortran compiler for serial build
 endif()
 
+set(USER_CUDA_FLAGS "-fopenmp")
 set(USER_CXX_FLAGS "-std=c++14 -DBOOL_TYPE=\"signed char\"")
-set(USER_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -march=native")
+set(USER_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -march=native -fopenmp")
 set(USER_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wno-unknown-pragmas")
 set(USER_FC_FLAGS "-std=f2003 -fdefault-real-8 -fdefault-double-8 -fPIC -ffixed-line-length-none -fno-range-check")
 set(USER_FC_FLAGS_RELEASE "-O3 -DNDEBUG -march=native")
 set(USER_FC_FLAGS_DEBUG "-O0 -g -Wall -Wno-unknown-pragmas")
+set(CMAKE_CUDA_ARCHITECTURES 86)
+set(CMAKE_CUDA_STANDARD 23)
+
 
 set(NETCDF_INCLUDE_DIR "/usr/include")
-set(NETCDF_LIB_C       "/usr/lib/x86_64-linux-gnu/libnetcdf.so")
-set(HDF5_LIB_1         "/usr/lib/x86_64-linux-gnu/libhdf5_serial.so")
-set(HDF5_LIB_2         "/usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so")
+set(NETCDF_LIB_C       "/usr/lib/libnetcdf.so")
+set(HDF5_LIB_1         "/usr/lib/libhdf5.so")
+set(HDF5_LIB_2         "/usr/lib/libhdf5_hl.so")
 
 set(LIBS ${NETCDF_LIB_C} ${HDF5_LIB_2} ${HDF5_LIB_1} m z curl)
 set(INCLUDE_DIRS ${FFTW_INCLUDE_DIR} ${NETCDF_INCLUDE_DIR})
